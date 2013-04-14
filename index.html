@@ -43,25 +43,19 @@
 <p><a href="http://callanbryant.co.uk/#Blog">See my blog post about it</a>.</p>
 
 <pre><code>sudo npm install -g megafilter
-# copy subscriptions.xml from your google reader takeout to here
-node app -s sumscriptions.xml
+# copy subscriptions.xml and starred.json from your google reader takeout to here
+node app -s subscriptions.xml --import-greader-starred starred.json
 open http://localhost:8080
 </code></pre>
 
 <p>The idea is that you run this on your own server. You can specify a PORT via
 the environment variable or <code>--port</code>. <a href="http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l">Setcap can be used</a> to run from port 80 without sudo</p>
 
-<p>There will be a subscriptions manager soon.</p>
+<p>There will be a subscriptions manager soon. For the mean time, always start the
+server with <code>-s subscriptions.xml</code>. Note that you only need to import once!</p>
 
 <p>You can specify <code>--password &lt;password&gt;</code> to require auth. A <code>--username</code> can be
 set, but this defaults to the executing user.</p>
-
-<p>If you want to import starred items, <strong>before the server is started,</strong> run:</p>
-
-<pre><code>megafilter-import --google-starred starred.json
-</code></pre>
-
-<p>using the file from the takeout.</p>
 
 <h2>RESTful JSON API</h2>
 
