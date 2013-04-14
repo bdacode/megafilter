@@ -42,13 +42,9 @@
 
 <p><a href="http://callanbryant.co.uk/#Blog">See my blog post about it</a>.</p>
 
-<p>Remember to do a recursive clone, there are submodules. If you don't the icons won't work.</p>
-
-<pre><code>git clone --recursive https://github.com/naggie/megafilter.git
-cd megafilter/
+<pre><code>sudo npm install -g megafilter
 # copy subscriptions.xml from your google reader takeout to here
-npm install
-node app
+node app -s sumscriptions.xml
 open http://localhost:8080
 </code></pre>
 
@@ -62,7 +58,7 @@ set, but this defaults to the executing user.</p>
 
 <p>If you want to import starred items, <strong>before the server is started,</strong> run:</p>
 
-<pre><code>node import --google-starred starred.json
+<pre><code>megafilter-import --google-starred starred.json
 </code></pre>
 
 <p>using the file from the takeout.</p>
