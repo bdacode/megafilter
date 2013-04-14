@@ -1,0 +1,167 @@
+<!doctype html>
+<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
+<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on http://github.com/jonrohan -->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen"/>
+  <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="javascripts/script.js"></script>
+
+  <title>Megafilter</title>
+  <meta name="description" content="Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <header>
+      <h1 class="title">Megafilter</h1>
+    </header>
+    <div id="container">
+      <p class="tagline">Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended</p>
+      <div id="main" role="main">
+        <div class="download-bar">
+        <div class="inner">
+          <a href="https://github.com/naggie/megafilter/tarball/master" class="download-button tar"><span>Download</span></a>
+          <a href="https://github.com/naggie/megafilter/zipball/master" class="download-button zip"><span>Download</span></a>
+          <a href="https://github.com/naggie/megafilter" class="code">View Megafilter on GitHub</a>
+        </div>
+        <span class="blc"></span><span class="trc"></span>
+        </div>
+        <article class="markdown-body">
+          <p><img src="http://callanbryant.co.uk/images/megafilter.png" alt="screenshot"></p>
+
+<p>This is a personal replacement for Google reader. It's simple and suits my workflow.</p>
+
+<p><a href="http://callanbryant.co.uk/#Blog">See my blog post about it</a>.</p>
+
+<p>Remember to do a recursive clone, there are submodules. If you don't the icons won't work.</p>
+
+<pre><code>git clone --recursive https://github.com/naggie/megafilter.git
+cd megafilter/
+# copy subscriptions.xml from your google reader takeout to here
+npm install
+node app
+open http://localhost:8080
+</code></pre>
+
+<p>The idea is that you run this on your own server. You can specify a PORT via
+the environment variable or <code>--port</code>. <a href="http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l">Setcap can be used</a> to run from port 80 without sudo</p>
+
+<p>There will be a subscriptions manager soon.</p>
+
+<p>You can specify <code>--password &lt;password&gt;</code> to require auth. A <code>--username</code> can be
+set, but this defaults to the executing user.</p>
+
+<p>If you want to import starred items, <strong>before the server is started,</strong> run:</p>
+
+<pre><code>node import --google-starred starred.json
+</code></pre>
+
+<p>using the file from the takeout.</p>
+
+<h2>RESTful JSON API</h2>
+
+<blockquote>
+<p><code>GET /next</code>
+Get the next article. Returns <code>article</code> and <code>pending</code> count.</p>
+
+<p><code>GET /current</code>
+Get the current article (good for first load) returns <code>article</code> and <code>pending</code> count.</p>
+
+<p><code>DELETE /queue/:id</code>
+Discard an article from the queue.</p>
+
+<p><code>PUT /publish/:id</code>
+Publish an article by ID from the queue.</p>
+
+<p><code>GET /published</code>
+Given a <code>count</code> as parameter, return published articles. 0 Means all articles, unspecified  means 30.</p>
+
+<p><code>GET /pending</code>
+Gives the current number of articles pending</p>
+
+<p><code>DELETE /published/:id</code>
+Delete an article from the published collection</p>
+
+<p><code>POST /enqueue</code>
+Remotely adds an article to the queue.</p>
+</blockquote>
+
+<h2>Article format</h2>
+
+<p>The same as the node-feedparser format.</p>
+
+<ul>
+<li><code>title</code></li>
+<li>
+<code>description</code> (frequently, the full article content)</li>
+<li>
+<code>summary</code> (frequently, an excerpt of the article content)</li>
+<li><code>link</code></li>
+<li>
+<code>origlink</code> (when FeedBurner or Pheedo puts a special tracking url in the <code>link</code> property, <code>origlink</code> contains the original link)</li>
+<li>
+<code>date</code> (most recent update)</li>
+<li>
+<code>pubdate</code> (original published date)</li>
+<li><code>author</code></li>
+<li>
+<code>guid</code> (a unique identifier for the article)</li>
+<li>
+<code>comments</code> (a link to the article's comments section)</li>
+<li>
+<code>image</code> (an Object containing <code>url</code> and <code>title</code> properties)</li>
+<li>
+<code>categories</code> (an Array of Strings)</li>
+<li>
+<code>source</code> (an Object containing <code>url</code> and <code>title</code> properties pointing to the original source for an article; see the <a href="http://cyber.law.harvard.edu/rss/rss.html#ltsourcegtSubelementOfLtitemgt">RSS Spec</a> for an explanation of this element)</li>
+<li>
+<code>enclosures</code> (an Array of Objects, each representing a podcast or other enclosure and having a <code>url</code> property and possibly <code>type</code> and <code>length</code> properties)</li>
+<li>
+<code>meta</code> (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to <code>article</code> emissions)</li>
+</ul><h2>Acknowledgements</h2>
+
+<p>Megafilter would not have been possible without the following awesome projects:</p>
+
+<ul>
+<li>
+<a href="https://github.com/danmactough/node-feedparser">node feedparser</a>: Used to understand RSS feeds</li>
+<li>
+<a href="https://github.com/jeresig/jquery.hotkeys">jQuery hotkeys</a>: Used for the keyboard shorcuts</li>
+<li>
+<a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>: used for the UI graphics</li>
+<li><a href="http://jquery.com">jQuery</a></li>
+<li>
+<a href="http://mcavage.github.io/node-restify/">node restify</a>: Used for the RESTful JSON API, and UI serving</li>
+</ul>
+        </article>
+      </div>
+    </div>
+    <footer>
+      <div class="owner">
+      <p><a href="https://github.com/naggie" class="avatar"><img src="https://secure.gravatar.com/avatar/43675ac6f4ef94f40b5e44add2a984c1?s=30&amp;d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-user-420.png" width="48" height="48"/></a> <a href="https://github.com/naggie">naggie</a> maintains <a href="https://github.com/naggie/megafilter">Megafilter</a></p>
+
+
+      </div>
+      <div class="creds">
+        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br/>theme by <a href="http://twitter.com/jonrohan/">Jon Rohan</a></small>
+      </div>
+    </footer>
+  </div>
+  <div class="current-section">
+    <a href="#top">Scroll to top</a>
+    <a href="https://github.com/naggie/megafilter/tarball/master" class="tar">tar</a><a href="https://github.com/naggie/megafilter/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
+    <p class="name"></p>
+  </div>
+
+  
+</body>
+</html>
