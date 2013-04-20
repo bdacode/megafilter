@@ -66,7 +66,7 @@ questions please contact me using <a href="mailto:callan.bryant@gmail.com">calla
 
 <pre><code>sudo npm install -g megafilter
 # copy subscriptions.xml and starred.json from your google reader takeout to here
-node app -s subscriptions.xml --import-greader-starred starred.json
+megafilter -s subscriptions.xml --import-greader-starred starred.json
 open http://localhost:8080
 </code></pre>
 
@@ -82,6 +82,9 @@ set, but this defaults to the executing user.</p>
 
 <p>By default megafilter will save the published items to
 <code>~/megafilter-published.json</code>. You can change this directory with <code>--store-dir</code></p>
+
+<p>When running, ~megafilter will wait for new articles. You may have to wait a
+bit! A backfill option will be added.</p>
 
 <h2>RESTful JSON API</h2>
 
