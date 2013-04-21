@@ -47,7 +47,8 @@ next. Articles can be:</p>
 <p>The current article is synchronised across all devices, so you can continue reading
 on yor smartphone.</p>
 
-<p><strong>State: Very beta but working very well!</strong> I have migrated from Google reader to Megafilter.</p>
+<p><strong>State: Very beta but working very well!</strong> I have migrated from Google reader
+to Megafilter.</p>
 
 <p><img src="http://callanbryant.co.uk/images/megafilter.png" alt="screenshot"></p>
 
@@ -72,8 +73,13 @@ set, but this defaults to the executing user.</p>
 <p>By default megafilter will save the published items to
 <code>~/megafilter-published.json</code>. You can change this directory with <code>--store-dir</code></p>
 
-<p>When running, ~megafilter will wait for new articles. You may have to wait a
-bit! A backfill option will be added.</p>
+<p>When megafilter starts, it will check each feed within the first 2 minutes
+(this is so that servers don't get hammered) and after this, each feed will be
+checked at the average post interval. Articles that are posted after the
+initial check are added to the queue, so it may take a while for articles to
+appear. If you are excited and/or impatient like me, then you may use the new
+<code>--backfill 5</code> option, to initially add articles that were new in the last 5
+hours. Articles will take 2 minutes to appear.</p>
 
 <h2>RESTful JSON API</h2>
 
@@ -91,7 +97,7 @@ Discard an article from the queue.</p>
 Publish an article by ID from the queue.</p>
 
 <p><code>GET /published</code>
-Given a <code>count</code> as parameter, return published articles. 0 Means all articles, unspecified  means 30.</p>
+Given a <code>count</code> as parameter, return published articles. 0 Means all articles, unspecified  means 50.</p>
 
 <p><code>GET /pending</code>
 Gives the current number of articles pending</p>
@@ -105,7 +111,7 @@ Remotely adds an article to the queue.</p>
 
 <h2>Article format</h2>
 
-<p>The same as the node-feedparser format.</p>
+<p>The same as the <a href="https://github.com/danmactough/node-feedparser">node-feedparser</a> format.</p>
 
 <ul>
 <li><code>title</code></li>
@@ -135,9 +141,22 @@ Remotely adds an article to the queue.</p>
 <code>enclosures</code> (an Array of Objects, each representing a podcast or other enclosure and having a <code>url</code> property and possibly <code>type</code> and <code>length</code> properties)</li>
 <li>
 <code>meta</code> (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to <code>article</code> emissions)</li>
-</ul><h2>Running without sudo on port 80</h2>
+</ul><h2>Published articles</h2>
 
-<p>If you want to host on port 80 under ubuntu on your account, you can install <code>libcap2-bin</code> 
+<p>Currently, megafilter does not create a published RSS feed. If that's needed by
+someone I'll add it. The reason I did not put it is because RSS is not
+cross-domain, and is annoying to parse with jQuery.</p>
+
+<p>The <code>/published</code> JSONP feed is simply the latest 50 published articles in the
+format that <a href="https://github.com/danmactough/node-feedparser">node-feedparser</a> produces.</p>
+
+<p>If you want an example on how to integrate the published items, see <a href="https://github.com/naggie/naggie.github.com/blob/master/js/src/engine.js">my website engine.</a></p>
+
+<p>I'll probably make this available as part of megafilter.</p>
+
+<h2>Running without sudo on port 80</h2>
+
+<p>If you want to host on port 80 under ubuntu on your account, you can install <code>libcap2-bin</code>
 then run <code>setcap 'cap_net_bind_service=+ep' /usr/local/bin/node</code> to give node access to port 80.</p>
 
 <p>Your path to the <code>node</code> binary may vary, you can find it with <code>which node</code></p>
