@@ -71,8 +71,8 @@ open http://localhost:8080
 </code></pre>
 
 <p>The idea is that you run this on your own server. You can specify a PORT via
-the environment variable or <code>--port</code>. <a href="http://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-1024-on-l">Setcap can be used</a> to run from port
-80 without sudo</p>
+the environment variable or <code>--port</code>. Setcap can be used to run from port
+80 without sudo; this is documented at the end of this file.</p>
 
 <p>There will be a subscriptions manager soon. For the mean time, always start the
 server with <code>-s subscriptions.xml</code>. Note that you only need to import once!</p>
@@ -146,7 +146,14 @@ Remotely adds an article to the queue.</p>
 <code>enclosures</code> (an Array of Objects, each representing a podcast or other enclosure and having a <code>url</code> property and possibly <code>type</code> and <code>length</code> properties)</li>
 <li>
 <code>meta</code> (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to <code>article</code> emissions)</li>
-</ul><h2>Acknowledgements</h2>
+</ul><h2>Running without sudo on port 80</h2>
+
+<p>If you want to host on port 80 under ubuntu on your account, you can install <code>libcap2-bin</code> 
+then run <code>setcap 'cap_net_bind_service=+ep' /usr/local/bin/node</code> to give node access to port 80.</p>
+
+<p>Your path to the <code>node</code> binary may vary, you can find it with <code>which node</code></p>
+
+<h2>Acknowledgements</h2>
 
 <p>Megafilter would not have been possible without the following awesome projects:</p>
 
