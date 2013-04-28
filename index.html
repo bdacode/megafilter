@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Megafilter by naggie</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Megafilter : Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended" />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Megafilter</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>Megafilter</h1>
-        <p>Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended</p>
 
-        <p class="view"><a href="https://github.com/naggie/megafilter">View the Project on GitHub <small>naggie/megafilter</small></a></p>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/naggie/megafilter">View on GitHub</a>
 
+          <h1 id="project_title">Megafilter</h1>
+          <h2 id="project_tagline">Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended</h2>
 
-        <ul>
-          <li><a href="https://github.com/naggie/megafilter/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/naggie/megafilter/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/naggie/megafilter">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/naggie/megafilter/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/naggie/megafilter/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <p>This is a personal replacement for Google reader. It's simple and suits my workflow.</p>
 
 <p>Articles are added to a circular FIFO queue, so that the latest articles always appear
@@ -163,6 +166,20 @@ then run <code>setcap 'cap_net_bind_service=+ep' /usr/local/bin/node</code> to g
 
 <p>Your path to the <code>node</code> binary may vary, you can find it with <code>which node</code></p>
 
+<h2>Theming</h2>
+
+<p>Since v0.5.1 (global) theming is supported! To use theming, add:</p>
+
+<pre><code>--theme &lt;name&gt;
+</code></pre>
+
+<p>To the megafilter command, where <code>&lt;name&gt;</code> is the filename of a css file in
+<code>public/themes/</code>. Currently, the two themes available are <code>default</code> and <code>lime</code>.
+Many thanks to <a href="https://github.com/dvbportal" class="user-mention">@dvbportal</a> for developing the lime theme.</p>
+
+<p>If you are switching themes, you may need to do a refresh to clear the cache.
+It is CTRL+SHIFT+R on Chrome.</p>
+
 <h2>Acknowledgements</h2>
 
 <p>Megafilter would not have been possible without the following awesome projects:</p>
@@ -177,14 +194,21 @@ then run <code>setcap 'cap_net_bind_service=+ep' /usr/local/bin/node</code> to g
 <li><a href="http://jquery.com">jQuery</a></li>
 <li>
 <a href="http://mcavage.github.io/node-restify/">node restify</a>: Used for the RESTful JSON API, and UI serving</li>
+<li>
+<a href="http://mcavage.github.io/node-restify/">node static</a>: Used to implement serving <code>/style</code> dynamically</li>
 </ul>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/naggie">naggie</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Megafilter maintained by <a href="https://github.com/naggie">naggie</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
+
     
+
   </body>
 </html>
