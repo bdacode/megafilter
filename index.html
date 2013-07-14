@@ -16,7 +16,7 @@
     <div class="wrapper">
       <header>
         <h1>Megafilter</h1>
-        <p>Easter 2013 project: My replacement for Google Reader, to produce a starred items feed. My copy publishes to http://callanbryant.co.uk/#Recommended</p>
+        <p>Single-user Google RSS Reader alternative, with RESTful API</p>
 
         <p class="view"><a href="https://github.com/naggie/megafilter">View the Project on GitHub <small>naggie/megafilter</small></a></p>
 
@@ -28,7 +28,7 @@
         </ul>
       </header>
       <section>
-        <p>This is a personal replacement for Google reader. It's simple and suits my workflow.</p>
+        <p>Single-user Google RSS Reader alternative, with RESTful API</p>
 
 <p>Articles are added to a circular FIFO queue, so that the latest articles always appear
 next. Articles can be:</p>
@@ -50,7 +50,8 @@ on yor smartphone.</p>
 <p>It's quite a nice use for your Raspberry Pi.</p>
 
 <p><strong>State: Very beta but working very well!</strong> I have migrated from Google reader
-to Megafilter. <strong>Patches welcome!</strong></p>
+to Megafilter. <strong>Patches welcome!</strong> to produce a starred items feed. My copy
+publishes to <a href="http://callanbryant.co.uk/#Recommended">http://callanbryant.co.uk/#Recommended</a></p>
 
 <p><img src="http://callanbryant.co.uk/images/megafilter.png" alt="screenshot"></p>
 
@@ -83,7 +84,8 @@ appear. If you are excited and/or impatient like me, then you may use the new
 <code>--backfill 5</code> option, to initially add articles that were new in the last 5
 hours. Articles will take 2 minutes to appear.</p>
 
-<h2>RESTful JSON API</h2>
+<h2>
+<a name="restful-json-api" class="anchor" href="#restful-json-api"><span class="octicon octicon-link"></span></a>RESTful JSON API</h2>
 
 <blockquote>
 <p><code>GET /next</code>
@@ -111,7 +113,8 @@ Delete an article from the published collection</p>
 Remotely adds an article to the queue.</p>
 </blockquote>
 
-<h2>Article format</h2>
+<h2>
+<a name="article-format" class="anchor" href="#article-format"><span class="octicon octicon-link"></span></a>Article format</h2>
 
 <p>The same as the <a href="https://github.com/danmactough/node-feedparser">node-feedparser</a> format.</p>
 
@@ -143,7 +146,8 @@ Remotely adds an article to the queue.</p>
 <code>enclosures</code> (an Array of Objects, each representing a podcast or other enclosure and having a <code>url</code> property and possibly <code>type</code> and <code>length</code> properties)</li>
 <li>
 <code>meta</code> (an Object containing all the feed meta properties; especially handy when using the EventEmitter interface to listen to <code>article</code> emissions)</li>
-</ul><h2>Published articles</h2>
+</ul><h2>
+<a name="published-articles" class="anchor" href="#published-articles"><span class="octicon octicon-link"></span></a>Published articles</h2>
 
 <p>Currently, megafilter does not create a published RSS feed. If that's needed by
 someone I'll add it. The reason I did not put it is because RSS is not
@@ -156,14 +160,16 @@ format that <a href="https://github.com/danmactough/node-feedparser">node-feedpa
 
 <p>I'll probably make this available as part of megafilter.</p>
 
-<h2>Running without sudo on port 80</h2>
+<h2>
+<a name="running-without-sudo-on-port-80" class="anchor" href="#running-without-sudo-on-port-80"><span class="octicon octicon-link"></span></a>Running without sudo on port 80</h2>
 
 <p>If you want to host on port 80 under ubuntu on your account, you can install <code>libcap2-bin</code>
 then run <code>setcap 'cap_net_bind_service=+ep' /usr/local/bin/node</code> to give node access to port 80.</p>
 
 <p>Your path to the <code>node</code> binary may vary, you can find it with <code>which node</code></p>
 
-<h2>Theming</h2>
+<h2>
+<a name="theming" class="anchor" href="#theming"><span class="octicon octicon-link"></span></a>Theming</h2>
 
 <p>Since v0.5.1 (global) theming is supported! To use theming, add:</p>
 
@@ -181,7 +187,8 @@ Many thanks to <a href="https://github.com/dvbportal" class="user-mention">@dvbp
 <p>If you are switching themes, you may need to do a refresh to clear the cache.
 It is CTRL+SHIFT+R on Chrome.</p>
 
-<h2>Acknowledgements</h2>
+<h2>
+<a name="acknowledgements" class="anchor" href="#acknowledgements"><span class="octicon octicon-link"></span></a>Acknowledgements</h2>
 
 <p>Megafilter would not have been possible without the following awesome projects:</p>
 
@@ -197,7 +204,7 @@ It is CTRL+SHIFT+R on Chrome.</p>
 <a href="http://mcavage.github.io/node-restify/">node restify</a>: Used for the RESTful JSON API, and UI serving</li>
 <li>
 <a href="http://mcavage.github.io/node-restify/">node static</a>: Used to implement serving <code>/style</code> dynamically</li>
-</ul>
+</ul><p><a href="https://www.gittip.com/naggie/">Donate on gittip to support megafilter, if you like. Thanks!</a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/naggie">naggie</a></p>
